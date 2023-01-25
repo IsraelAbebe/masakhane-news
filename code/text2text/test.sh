@@ -1,7 +1,8 @@
 #!/bin/bash
 
+git clone https://github.com/IsraelAbebe/masakhane-news
 
-
+cd masakhane-news/code/text2text
 
 export TOKENIZERS_PARALLELISM=true
 
@@ -23,7 +24,7 @@ do
         max_seq_length="128"
         learning_rate="3e-4"
         train_batch_size="4"
-        eval_batch_size="4"
+        eval_batch_size="16"
         num_train_epochs="20"
         gradient_accumulation_steps="4"
         class_dir=../../data/${j}
@@ -31,7 +32,7 @@ do
         target_column="category"
         prompt="classify: "
 
-        python classification_trainer.py --train_data_path=$train_data_path \
+        torchrun classification_trainer.py --train_data_path=$train_data_path \
                 --eval_data_path=$eval_data_path \
                 --test_data_path=$test_data_path \
                 --model_name_or_path=$model_name_or_path \

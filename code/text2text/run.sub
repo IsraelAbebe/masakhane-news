@@ -1,0 +1,16 @@
+universe 		= docker
+docker_image 		= israelabebe/diffseq:latest
+executable              = test.sh
+output                  = test.$(ClusterId).$(ProcId).out
+error                   = test.$(ClusterId).$(ProcId).err
+log                     = test.$(ClusterId).log
+should_transfer_files   = YES
+when_to_transfer_output = ON_EXIT
+request_GPUs = 4
+request_CPUs = 4
+request_memory = 120G
+requirements = UidDomain == "cs.uni-saarland.de"
+getenv = HOME
+accounting_group = chair_cg
++WantGPUHomeMounted = true
+queue 1
