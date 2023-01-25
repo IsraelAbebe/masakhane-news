@@ -112,13 +112,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/GaussianNB/test_results.txt", 'w') as f:
+        with open(f"{language}/GaussianNB/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/GaussianNB/test_results.txt")
+        print(f"[INFO] Saved {language}/GaussianNB/test_results{args.seed}.txt")
         f.close()
 
 
@@ -153,13 +153,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/MultinomialNB/test_results.txt", 'w') as f:
+        with open(f"{language}/MultinomialNB/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/MultinomialNB/test_results.txt")
+        print(f"[INFO] Saved {language}/MultinomialNB/test_results{args.seed}.txt")
         f.close()
 
 
@@ -193,13 +193,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/KNeighborsClassifier/test_results.txt", 'w') as f:
+        with open(f"{language}/KNeighborsClassifier/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/KNeighborsClassifier/test_results.txt")
+        print(f"[INFO] Saved {language}/KNeighborsClassifier/test_results{args.seed}.txt")
         f.close()
 
 
@@ -233,13 +233,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/MLPClassifier/test_results.txt", 'w') as f:
+        with open(f"{language}/MLPClassifier/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/MLPClassifier/test_results.txt")
+        print(f"[INFO] Saved {language}/MLPClassifier/test_results{args.seed}.txt")
         f.close()
 
         print('=======   XGBClassifier   =========')
@@ -272,13 +272,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/XGBClassifier/test_results.txt", 'w') as f:
+        with open(f"{language}/XGBClassifier/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/XGBClassifier/test_results.txt")
+        print(f"[INFO] Saved {language}/XGBClassifier/test_results{args.seed}.txt")
         f.close()
 
 
@@ -311,13 +311,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/SVC/test_results.txt", 'w') as f:
+        with open(f"{language}/SVC/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/XGBClassifier/test_results.txt")
+        print(f"[INFO] Saved {language}/XGBClassifier/test_results{args.seed}.txt")
         f.close()
 
         
