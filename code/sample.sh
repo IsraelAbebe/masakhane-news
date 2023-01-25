@@ -1,9 +1,15 @@
 export MAX_LENGTH=164
 export OUTPUT_FILE=test_result
 export OUTPUT_PREDICTION=test_predictions
+<<<<<<< HEAD
 export BATCH_SIZE=2
 export NUM_EPOCHS=1
 export SAVE_STEPS=50
+=======
+export BATCH_SIZE=16
+export NUM_EPOCHS=10
+export SAVE_STEPS=500000
+>>>>>>> 3c70eb9130dfd86e4a623edd40c2b9ad8ed91ce2
 export SEED=1
 export LANG=pcm
 export DATA_DIR=../data/${LANG}
