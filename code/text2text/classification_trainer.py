@@ -14,11 +14,21 @@ from pytorch_lightning.loggers import CSVLogger
 import json
 import os
 import pandas as pd
+import numpy as np
 
 from transformers.models.byt5.tokenization_byt5 import ByT5Tokenizer
 
 MODEL_MAX_LENGTH = 512
-
+def seed_everything(seed=42):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    
 
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Finetune T5 fle classification")
@@ -69,6 +79,7 @@ def main():
     args = parser.parse_args()
 
     print(f"Training Arguments {args}")
+    seed_everything(args.seed)
 
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name_or_path)
 
@@ -237,12 +248,12 @@ def main():
     print(f"recall = {recall}")
     
     
-    with open(f"{args.output_dir}/test_results.txt", 'w') as f:
+    with open(f"{args.output_dir}/test_results{args.seed}.txt", 'w') as f:
         f.write(f"f1 = {f1}\n")
         f.write(f"loss = {None}\n")
         f.write(f"precision = {precision}\n")
         f.write(f"recall = {recall}\n")
-    
+
     f.close()
 
     '''     
