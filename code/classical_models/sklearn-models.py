@@ -30,10 +30,10 @@ def main():
     
     folder_name = '../../data/'
 
-    feature_column = "headline"
+    feature_column = "headline_text"
     label_column = "category"
 
-    language_list = ['amh','eng','fra','hau','ibo','lin','pcm','run','swa','yor']
+    language_list = ['amh','eng','fra','hau','ibo','lin','pcm','run','swa','yor','sna','orm']
     print(language_list)
     for language in language_list:
         print('-------------------------------------------------')
@@ -41,19 +41,30 @@ def main():
 
         train_data = pd.read_csv(f'{folder_name}/{language}/train.tsv',sep='\t')
         dev_data = pd.read_csv(f'{folder_name}/{language}/dev.tsv',sep='\t')
-        test_data = pd.read_csv(f'{folder_name}/{language}/dev.tsv',sep='\t')
+        test_data = pd.read_csv(f'{folder_name}/{language}/test.tsv',sep='\t')
+        
+        
+         # #COMBINE HEADLNE AND TEXT
+        train_data["headline_text"] = train_data["headline"].astype(str) + train_data["text"].astype(str)
+        dev_data["headline_text"] = dev_data["headline"].astype(str) + dev_data["text"].astype(str)
+        test_data["headline_text"] = test_data["headline"].astype(str) + test_data["text"].astype(str)
 
         print(f' Training set size : {train_data.size}   Dev set size: {dev_data.size}')
 
         all_text_list  = train_data[feature_column].values.tolist()+dev_data[feature_column].values.tolist() 
 
         print('[INFO] Sample data \n',all_text_list[:3])
+        
+        
+        
+        
+        # print(train_data)
 
         train_text,train_label = train_data[feature_column].values.tolist(),train_data[label_column].values.tolist()
         dev_text,dev_label = dev_data[feature_column].values.tolist(),dev_data[label_column].values.tolist()
         test_text,test_label = test_data[feature_column].values.tolist(),test_data[label_column].values.tolist()
 
-
+        
         unique_label = train_data[label_column].unique().tolist()
 
         print('[INFO] Found Labels : ',unique_label)
@@ -100,11 +111,14 @@ def main():
 
         if not os.path.exists(f"{language}/GaussianNB"):
             os.makedirs(f"{language}/GaussianNB")
-
-        acc = metrics.accuracy_score(y_dev, y_pred)
-        f1 = metrics.f1_score(y_dev, y_pred,average='weighted')
-        precision = metrics.precision_score(y_dev, y_pred,average='weighted')
-        recall = metrics.recall_score(y_dev, y_pred,average='weighted')
+        
+        
+        y_pred = classifier.predict(X_test)
+        
+        acc = metrics.accuracy_score(y_test, y_pred)
+        f1 = metrics.f1_score(y_test, y_pred,average='weighted')
+        precision = metrics.precision_score(y_test, y_pred,average='weighted')
+        recall = metrics.recall_score(y_test, y_pred,average='weighted')
 
         print(f"f1 = {f1}")
         print(f"loss = {None}")
@@ -138,14 +152,19 @@ def main():
 
         print(f'acc: {accuracy}     |  f1_score: {f1}')
         print(metrics.classification_report(y_dev, y_pred, target_names=unique_label))
-
+        
+        
+        # TESTING
+        
         if not os.path.exists(f"{language}/MultinomialNB"):
             os.makedirs(f"{language}/MultinomialNB")
 
-        acc = metrics.accuracy_score(y_dev, y_pred)
-        f1 = metrics.f1_score(y_dev, y_pred,average='weighted')
-        precision = metrics.precision_score(y_dev, y_pred,average='weighted')
-        recall = metrics.recall_score(y_dev, y_pred,average='weighted')
+        y_pred = classifier.predict(X_test)
+        
+        acc = metrics.accuracy_score(y_test, y_pred)
+        f1 = metrics.f1_score(y_test, y_pred,average='weighted')
+        precision = metrics.precision_score(y_test, y_pred,average='weighted')
+        recall = metrics.recall_score(y_test, y_pred,average='weighted')
 
         print(f"f1 = {f1}")
         print(f"loss = {None}")
@@ -182,10 +201,12 @@ def main():
         if not os.path.exists(f"{language}/KNeighborsClassifier"):
             os.makedirs(f"{language}/KNeighborsClassifier")
 
-        acc = metrics.accuracy_score(y_dev, y_pred)
-        f1 = metrics.f1_score(y_dev, y_pred,average='weighted')
-        precision = metrics.precision_score(y_dev, y_pred,average='weighted')
-        recall = metrics.recall_score(y_dev, y_pred,average='weighted')
+        y_pred = classifier.predict(X_test)
+        
+        acc = metrics.accuracy_score(y_test, y_pred)
+        f1 = metrics.f1_score(y_test, y_pred,average='weighted')
+        precision = metrics.precision_score(y_test, y_pred,average='weighted')
+        recall = metrics.recall_score(y_test, y_pred,average='weighted')
 
         print(f"f1 = {f1}")
         print(f"loss = {None}")
@@ -222,10 +243,12 @@ def main():
         if not os.path.exists(f"{language}/MLPClassifier"):
             os.makedirs(f"{language}/MLPClassifier")
 
-        acc = metrics.accuracy_score(y_dev, y_pred)
-        f1 = metrics.f1_score(y_dev, y_pred,average='weighted')
-        precision = metrics.precision_score(y_dev, y_pred,average='weighted')
-        recall = metrics.recall_score(y_dev, y_pred,average='weighted')
+        y_pred = classifier.predict(X_test)
+        
+        acc = metrics.accuracy_score(y_test, y_pred)
+        f1 = metrics.f1_score(y_test, y_pred,average='weighted')
+        precision = metrics.precision_score(y_test, y_pred,average='weighted')
+        recall = metrics.recall_score(y_test, y_pred,average='weighted')
 
         print(f"f1 = {f1}")
         print(f"loss = {None}")
@@ -261,10 +284,12 @@ def main():
         if not os.path.exists(f"{language}/XGBClassifier"):
             os.makedirs(f"{language}/XGBClassifier")
 
-        acc = metrics.accuracy_score(y_dev, y_pred)
-        f1 = metrics.f1_score(y_dev, y_pred,average='weighted')
-        precision = metrics.precision_score(y_dev, y_pred,average='weighted')
-        recall = metrics.recall_score(y_dev, y_pred,average='weighted')
+        y_pred = classifier.predict(X_test)
+        
+        acc = metrics.accuracy_score(y_test, y_pred)
+        f1 = metrics.f1_score(y_test, y_pred,average='weighted')
+        precision = metrics.precision_score(y_test, y_pred,average='weighted')
+        recall = metrics.recall_score(y_test, y_pred,average='weighted')
 
         print(f"f1 = {f1}")
         print(f"loss = {None}")
@@ -300,10 +325,12 @@ def main():
         if not os.path.exists(f"{language}/SVC"):
             os.makedirs(f"{language}/SVC")
 
-        acc = metrics.accuracy_score(y_dev, y_pred)
-        f1 = metrics.f1_score(y_dev, y_pred,average='weighted')
-        precision = metrics.precision_score(y_dev, y_pred,average='weighted')
-        recall = metrics.recall_score(y_dev, y_pred,average='weighted')
+        y_pred = classifier.predict(X_test)
+        
+        acc = metrics.accuracy_score(y_test, y_pred)
+        f1 = metrics.f1_score(y_test, y_pred,average='weighted')
+        precision = metrics.precision_score(y_test, y_pred,average='weighted')
+        recall = metrics.recall_score(y_test, y_pred,average='weighted')
 
         print(f"f1 = {f1}")
         print(f"loss = {None}")
