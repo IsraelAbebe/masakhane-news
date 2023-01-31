@@ -109,8 +109,9 @@ def main():
         print(metrics.classification_report(y_dev, y_pred, target_names=unique_label))
 
 
-        if not os.path.exists(f"{language}/GaussianNB"):
-            os.makedirs(f"{language}/GaussianNB")
+        if not os.path.exists(f"GaussianNB/{language}"):
+            os.makedirs(f"GaussianNB/{language}")
+
         
         
         y_pred = classifier.predict(X_test)
@@ -126,13 +127,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/GaussianNB/test_results{args.seed}.txt", 'w') as f:
+        with open(f"GaussianNB/{language}/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/GaussianNB/test_results{args.seed}.txt")
+        print(f"[INFO] Saved GaussianNB/{language}/test_results{args.seed}.txt")
         f.close()
 
 
@@ -156,8 +157,9 @@ def main():
         
         # TESTING
         
-        if not os.path.exists(f"{language}/MultinomialNB"):
-            os.makedirs(f"{language}/MultinomialNB")
+        if not os.path.exists(f"MultinomialNB/{language}"):
+            os.makedirs(f"MultinomialNB/{language}")
+
 
         y_pred = classifier.predict(X_test)
         
@@ -172,13 +174,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/MultinomialNB/test_results{args.seed}.txt", 'w') as f:
+        with open(f"MultinomialNB/{language}/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/MultinomialNB/test_results{args.seed}.txt")
+        print(f"[INFO] Saved MultinomialNB/{language}/test_results{args.seed}.txt")
         f.close()
 
 
@@ -198,8 +200,8 @@ def main():
         print(f'acc: {accuracy}     |  f1_score: {f1}')
         print(metrics.classification_report(y_dev, y_pred, target_names=unique_label))
 
-        if not os.path.exists(f"{language}/KNeighborsClassifier"):
-            os.makedirs(f"{language}/KNeighborsClassifier")
+        if not os.path.exists(f"KNeighborsClassifier/{language}"):
+            os.makedirs(f"KNeighborsClassifier/{language}")
 
         y_pred = classifier.predict(X_test)
         
@@ -214,19 +216,18 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/KNeighborsClassifier/test_results{args.seed}.txt", 'w') as f:
+        with open(f"KNeighborsClassifier/{language}/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/KNeighborsClassifier/test_results{args.seed}.txt")
+        print(f"[INFO] Saved KNeighborsClassifier/{language}/test_results{args.seed}.txt")
         f.close()
-
 
         print('=======   MLPClassifier   =========')
 
-        classifier = MLPClassifier(random_state=1, max_iter=300)
+        classifier = MLPClassifier(random_state=args.seed, max_iter=300)
         classifier.fit(X_train, y_train)
 
         # Predict Class
@@ -240,8 +241,8 @@ def main():
         print(f'acc: {accuracy}     |  f1_score: {f1}')
         print(metrics.classification_report(y_dev, y_pred, target_names=unique_label))
 
-        if not os.path.exists(f"{language}/MLPClassifier"):
-            os.makedirs(f"{language}/MLPClassifier")
+        if not os.path.exists(f"MLPClassifier/{language}"):
+            os.makedirs(f"MLPClassifier/{language}")
 
         y_pred = classifier.predict(X_test)
         
@@ -256,18 +257,18 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/MLPClassifier/test_results{args.seed}.txt", 'w') as f:
+        with open(f"MLPClassifier/{language}/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/MLPClassifier/test_results{args.seed}.txt")
+        print(f"[INFO] Saved MLPClassifier/{language}/test_results{args.seed}.txt")
         f.close()
 
         print('=======   XGBClassifier   =========')
 
-        classifier = XGBClassifier()
+        classifier = XGBClassifier(seed=args.seed)
         classifier.fit(X_train, y_train)
 
         # Predict Class
@@ -281,8 +282,8 @@ def main():
         print(f'acc: {accuracy}     |  f1_score: {f1}')
         print(metrics.classification_report(y_dev, y_pred, target_names=unique_label))
 
-        if not os.path.exists(f"{language}/XGBClassifier"):
-            os.makedirs(f"{language}/XGBClassifier")
+        if not os.path.exists(f"XGBClassifier/{language}"):
+            os.makedirs(f"XGBClassifier/{language}")
 
         y_pred = classifier.predict(X_test)
         
@@ -297,19 +298,18 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/XGBClassifier/test_results{args.seed}.txt", 'w') as f:
+        with open(f"XGBClassifier/{language}/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/XGBClassifier/test_results{args.seed}.txt")
+        print(f"[INFO] Saved XGBClassifier/{language}/test_results{args.seed}.txt")
         f.close()
 
 
-
         print('=======   SVC   =========')
-        classifier = SVC(gamma='auto')
+        classifier = SVC(gamma='auto',random_state=args.seed)
         classifier.fit(X_train, y_train)
         # Predict Class
         y_pred = classifier.predict(X_dev)
@@ -322,8 +322,8 @@ def main():
         print(f'acc: {accuracy}     |  f1_score: {f1}')
         print(metrics.classification_report(y_dev, y_pred, target_names=unique_label))
 
-        if not os.path.exists(f"{language}/SVC"):
-            os.makedirs(f"{language}/SVC")
+        if not os.path.exists(f"SVC/{language}"):
+            os.makedirs(f"SVC/{language}")
 
         y_pred = classifier.predict(X_test)
         
@@ -338,13 +338,13 @@ def main():
         print(f"recall = {recall}")
 
 
-        with open(f"{language}/SVC/test_results{args.seed}.txt", 'w') as f:
+        with open(f"SVC/{language}/test_results{args.seed}.txt", 'w') as f:
             f.write(f"f1 = {f1}\n")
             f.write(f"loss = {None}\n")
             f.write(f"precision = {precision}\n")
             f.write(f"recall = {recall}\n")
 
-        print(f"[INFO] Saved {language}/XGBClassifier/test_results{args.seed}.txt")
+        print(f"[INFO] Saved SVC/{language}/test_results{args.seed}.txt")
         f.close()
 
         
