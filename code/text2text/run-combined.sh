@@ -54,7 +54,7 @@ do
                   --weight_decay="0.0" \
                   --adam_epsilon="1e-8" \
                   --warmup_steps="0" \
-                  --n_gpu=n_gpu \
+                  --n_gpu=$n_gpu \
                   --fp_16="false" \
                   --max_grad_norm="1.0" \
                   --opt_level="O1" \
