@@ -179,7 +179,8 @@ def main():
         precision=32,
         gradient_clip_val=args.max_grad_norm,
         callbacks=[LoggingCallback(), checkpoint_callback],
-        logger=csv_logger
+        logger=csv_logger,
+        strategy='ddp'
     )
 
     print("[INFO] Training model .........")
