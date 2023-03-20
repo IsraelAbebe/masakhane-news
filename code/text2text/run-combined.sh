@@ -1,14 +1,17 @@
 #!/bin/bash
 
-n_gpu = 8
-CUDA_VISIBLE_DEVICES = 0,1,2,3,4,5,6,7
+n_gpu=8
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+max_seq_length=128
+train_batch_size="8"
+eval_batch_size="8"
+num_train_epochs="50"
 
 export TOKENIZERS_PARALLELISM=true
 
 
 for j in  'eng'   #'amh' 'eng' 'fra' 'hau' 'ibo' 'lin' 'pcm' 'run' 'swa' 'yor' 'sna' 
 do
-     # #"castorini/afriteva_small"
     for i in  "google/flan-t5-large"  #"castorini/afriteva_base" castorini/afriteva_large"  "masakhane/afri-mt5-base" "masakhane/afri-byt5-base"
     do
       for seed in {1..10}
@@ -24,11 +27,8 @@ do
           lang=${j}
 
 
-          max_seq_length="128"
+          
           learning_rate="3e-4"
-          train_batch_size="8"
-          eval_batch_size="8"
-          num_train_epochs="50"
           gradient_accumulation_steps="4"
           class_dir=../../data/${j}
           data_column="combined"
