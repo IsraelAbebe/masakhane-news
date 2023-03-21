@@ -37,7 +37,7 @@ do
 
 
           dt=$(date '+%d/%m/%Y %H:%M:%S');
-          echo 'Start Time: {$dt}' > "/tmp/run-{$seed}.log"
+          echo "Start Time: $dt" > /tmp/run-$seed.log
 
           CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES python classification_trainer.py --train_data_path=$train_data_path \
                   --eval_data_path=$eval_data_path \
@@ -67,7 +67,7 @@ do
 
 
             dt=$(date '+%d/%m/%Y %H:%M:%S');
-            echo 'End Time: {$dt}' > "/tmp/run-{$seed}.log"
+            echo "End Time: $dt" > /tmp/run-$seed.log
 
 
 

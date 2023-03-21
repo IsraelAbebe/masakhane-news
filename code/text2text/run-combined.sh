@@ -11,7 +11,7 @@ export TOKENIZERS_PARALLELISM=true
 
 
 dt=$(date '+%d/%m/%Y %H:%M:%S');
-echo 'Start Time: {$dt}' > "/tmp/run.log"
+echo "Start Time: $dt" > /tmp/run-all.log
 
 for j in  'eng'   #'amh' 'eng' 'fra' 'hau' 'ibo' 'lin' 'pcm' 'run' 'swa' 'yor' 'sna' 
 do
@@ -74,5 +74,5 @@ do
     done
 done
 dt=$(date '+%d/%m/%Y %H:%M:%S');
-echo 'End Time: {$dt}' >> "/tmp/run.log"
+echo "End Time: $dt" > /tmp/run-all.log
 # cp -r ../text2text/output*   /home/azime/.
