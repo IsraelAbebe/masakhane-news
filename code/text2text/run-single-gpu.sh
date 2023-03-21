@@ -2,8 +2,8 @@
 
 
 max_seq_length=128
-train_batch_size="8"
-eval_batch_size="8"
+train_batch_size="16"
+eval_batch_size="16"
 num_train_epochs="50"
 
 export TOKENIZERS_PARALLELISM=true
