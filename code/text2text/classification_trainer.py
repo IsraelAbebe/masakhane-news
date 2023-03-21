@@ -178,8 +178,8 @@ def main():
         max_epochs=args.num_train_epochs,
         precision=32,
         gradient_clip_val=args.max_grad_norm,
-        callbacks=[LoggingCallback(), checkpoint_callback],
-        logger=csv_logger,
+        # callbacks=[LoggingCallback(), checkpoint_callback],
+        # logger=csv_logger,
         strategy='ddp'
     )
 

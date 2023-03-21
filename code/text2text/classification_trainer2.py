@@ -176,11 +176,7 @@ def main():
         accelerator='gpu' if torch.cuda.is_available() else 'cpu',
         devices=args.n_gpu if args.n_gpu else 1,
         max_epochs=args.num_train_epochs,
-        precision=32,
-        gradient_clip_val=args.max_grad_norm,
-        callbacks=[LoggingCallback(), checkpoint_callback],
-        logger=csv_logger,
-        strategy='ddp'
+        precision=32
     )
 
     print("[INFO] Training model .........")

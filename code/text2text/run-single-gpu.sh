@@ -39,7 +39,7 @@ do
           dt=$(date '+%d/%m/%Y %H:%M:%S');
           echo "Start Time: $dt" > /tmp/run-$seed.log
 
-          CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES python classification_trainer.py --train_data_path=$train_data_path \
+          CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES python classification_trainer2.py --train_data_path=$train_data_path \
                   --eval_data_path=$eval_data_path \
                   --test_data_path=$test_data_path \
                   --model_name_or_path=$model_name_or_path \
