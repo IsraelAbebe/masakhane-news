@@ -35,6 +35,10 @@ do
           target_column="category"
           prompt="classify: "
 
+
+          dt=$(date '+%d/%m/%Y %H:%M:%S');
+          echo 'Start Time: {$dt}' > "/tmp/run-{$seed}.log"
+
           CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES python classification_trainer.py --train_data_path=$train_data_path \
                   --eval_data_path=$eval_data_path \
                   --test_data_path=$test_data_path \
@@ -59,7 +63,11 @@ do
                   --max_grad_norm="1.0" \
                   --opt_level="O1" \
                   --seed=$seed \
-                  --lang=$lang
+                  --lang=$lang &&
+
+
+            dt=$(date '+%d/%m/%Y %H:%M:%S');
+            echo 'End Time: {$dt}' > "/tmp/run-{$seed}.log"
 
 
 

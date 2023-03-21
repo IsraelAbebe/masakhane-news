@@ -10,6 +10,9 @@ num_train_epochs="50"
 export TOKENIZERS_PARALLELISM=true
 
 
+dt=$(date '+%d/%m/%Y %H:%M:%S');
+echo 'Start Time: {$dt}' > "/tmp/run.log"
+
 for j in  'eng'   #'amh' 'eng' 'fra' 'hau' 'ibo' 'lin' 'pcm' 'run' 'swa' 'yor' 'sna' 
 do
     for i in  "google/flan-t5-large"  #"castorini/afriteva_base" castorini/afriteva_large"  "masakhane/afri-mt5-base" "masakhane/afri-byt5-base"
@@ -70,5 +73,6 @@ do
       done
     done
 done
-
+dt=$(date '+%d/%m/%Y %H:%M:%S');
+echo 'End Time: {$dt}' >> "/tmp/run.log"
 # cp -r ../text2text/output*   /home/azime/.
