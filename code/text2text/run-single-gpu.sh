@@ -63,8 +63,9 @@ do
                   --max_grad_norm="1.0" \
                   --opt_level="O1" \
                   --seed=$seed \
-                  --lang=$lang &&
+                  --lang=$lang &
 
+            sleep 2 &
 
             dt=$(date '+%d/%m/%Y %H:%M:%S');
             echo "End Time: $dt" > /tmp/run-$seed.log
