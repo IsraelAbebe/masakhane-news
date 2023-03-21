@@ -13,7 +13,7 @@ for j in  'eng'   #'amh' 'eng' 'fra' 'hau' 'ibo' 'lin' 'pcm' 'run' 'swa' 'yor' '
 do
     for i in  "google/flan-t5-large"  #"castorini/afriteva_base" castorini/afriteva_large"  "masakhane/afri-mt5-base" "masakhane/afri-byt5-base"
     do
-      for seed in {1..7}
+      for seed in {0..7}
       do
 
           train_data_path="../../data/${j}/train-combined.tsv"
